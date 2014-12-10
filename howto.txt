@@ -1,0 +1,15 @@
+Telephone Directory Client Server programs
+===================================
+
+The "user.py" is the client program to access the database and "admin.py" is the Server program which is connected to the telephone directory database.
+
+To run the program first configure your server to the MySql standards along with setting up the user and password for databse .
+
+Then run the admin.py
+
+At the client side , once the admin.py is running you are good to run the user.py and access the database .
+
+
+
+For further clarification write to me at :
+			             mohdasif2294@gmail.com
