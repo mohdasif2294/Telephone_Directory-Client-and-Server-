@@ -2,25 +2,25 @@ import MySQLdb
 import xmlrpclib
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
-db = MySQLdb.connect("localhost","root","","phonebook" )
+db = MySQLdb.connect("localhost","root","","phonebook" )  #connecting to database using root as user name and database as phonebook
 cursor = db.cursor()
 
-def insert_entry(fname,lname,pno,email,city,state) :
+def insert_entry(fname,lname,pno,email,city,state) :	#insert function defination
 	sql = """insert into Phonebook
 			 values ('%s','%s','%s','%s','%s','%s');"""%(fname,lname,pno,email,city,state)
 	try :
-		cursor.execute(sql)
+		cursor.execute(sql)  #executing sql command on database
 		db.commit()
 		return "s"
 	except :
-		db.rollback()
+		db.rollback() #if error undoing the changes
 		return "u"
 
 def delete_entry(pno) :
 	sql = """select fname from Phonebook where pno='%s';"""%(pno)
 
 	cursor.execute(sql)
-	results = cursor.fetchall()
+	results = cursor.fetchall()  #for fetching all the results as an array
 	
 	if results :
  		sql = """delete from Phonebook
@@ -77,7 +77,7 @@ def update_entry(key,fname,lname,email,city,state) :
 		if results :
 			sql = """update Phonebook set fname='%s' , lname='%s', email='%s', city='%s', state='%s' where pno = '%s';"""%(fname,lname,email,city,state,key)
 			cursor.execute(sql)
-			db.commit()
+			db.commit()  #commitng all the changes to db
 			return "s"
 		else :
 			return "null"	
@@ -86,7 +86,7 @@ def update_entry(key,fname,lname,email,city,state) :
 		return "null"
 
 server = SimpleXMLRPCServer(("localhost", 1994),
-                            allow_none=True)
+                            allow_none=True)   #defining server socket
 server.register_function(insert_entry)
 server.register_function(delete_entry)
 server.register_function(search_entry)
