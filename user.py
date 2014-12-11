@@ -1,6 +1,6 @@
 import xmlrpclib
 
-proxy = xmlrpclib.ServerProxy("http://localhost:1994/",allow_none=True)
+proxy = xmlrpclib.ServerProxy("http://localhost:1994/",allow_none=True)  #very important , connecting to server with the proxy
 
 while 1 :
 	print "\n======Telephone Directory Admin Database=======\n"
@@ -25,7 +25,7 @@ while 1 :
 		city =raw_input()
 		print "Enter state :"
 		state =raw_input()
-		string = proxy.insert_entry(fname,lname,pno,email,city,state)
+		string = proxy.insert_entry(fname,lname,pno,email,city,state) # Sending the data to server using function
 		if(string=="s"):
 			print "Insertion into Telephone Database successful\n"
 		else:
@@ -34,7 +34,7 @@ while 1 :
 	elif(n=="2"):
 		print "Enter Phone number"
 		pno = raw_input()
-		string = proxy.delete_entry(pno)
+		string = proxy.delete_entry(pno) #Delete function calling with phon no as argument
 		if(string=="s"):
 			print "Deletion successful .....\n"
 		else:
@@ -43,7 +43,7 @@ while 1 :
 	elif(n=="3"):
 		print "Enter first name or telephone you are searching for :"
 		key =raw_input()
-		results = proxy.search_entry(key)
+		results = proxy.search_entry(key)  #Searching database with this function and key
 		if(results=="null"):
 			print "No record exist for this first name or telephone !\n"
 		else :
@@ -67,7 +67,7 @@ while 1 :
 			city =raw_input()
 			print "Enter state :"
 			state =raw_input()
-			results=proxy.update_entry(key,fname,lname,email,city,state)
+			results=proxy.update_entry(key,fname,lname,email,city,state) #calling update function
 			if results :
 				print "Update Done............!\n"
 			else :
